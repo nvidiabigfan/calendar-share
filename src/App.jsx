@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ref, onValue, set, remove, update } from 'firebase/database';
+import { ref, onValue, set, remove } from 'firebase/database';
 import { db } from './firebase';
 import Calendar from './components/Calendar';
 import EventModal from './components/EventModal';
@@ -12,7 +12,7 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [editingEvent, setEditingEvent] = useState(null);
-  const [currentCalendarId, setCurrentCalendarId] = useState(calendarId || 'default');
+  const currentCalendarId = calendarId || 'default';
 
   useEffect(() => {
     if (!currentCalendarId) return;
