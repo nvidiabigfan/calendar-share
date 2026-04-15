@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/EventItem.css';
 
-function EventItem({ event, onEdit, onDelete }) {
+function EventItem({ event, onEdit, onDelete, showActions = false }) {
   const getTypeColor = (type) => {
     switch (type) {
       case '근무':
@@ -21,10 +21,12 @@ function EventItem({ event, onEdit, onDelete }) {
         <span className="event-type">{event.type}</span>
         {event.name && <span className="event-name">{event.name}</span>}
       </div>
-      <div className="event-actions">
-        <button className="btn-edit" onClick={(e) => { e.stopPropagation(); onEdit(); }}>✏️</button>
-        <button className="btn-delete" onClick={(e) => { e.stopPropagation(); onDelete(); }}>🗑️</button>
-      </div>
+      {showActions && (
+        <div className="event-actions">
+          <button className="btn-edit" onClick={(e) => { e.stopPropagation(); onEdit(); }}>✏️</button>
+          <button className="btn-delete" onClick={(e) => { e.stopPropagation(); onDelete(); }}>🗑️</button>
+        </div>
+      )}
     </div>
   );
 }

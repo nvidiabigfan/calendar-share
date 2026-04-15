@@ -82,6 +82,7 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
                     event={event}
                     onEdit={() => onEditEvent(event)}
                     onDelete={() => onDeleteEvent(event.id)}
+                    showActions={false}
                   />
                 ))}
               </div>
