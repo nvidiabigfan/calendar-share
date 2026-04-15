@@ -1,0 +1,107 @@
+.event-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 4px;
+}
+
+.event-item:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.event-item.work {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  border-left: 3px solid #1976d2;
+}
+
+.event-item.off {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+  border-left: 3px solid #7b1fa2;
+}
+
+.event-item.vacation {
+  background-color: #fff3e0;
+  color: #f57c00;
+  border-left: 3px solid #f57c00;
+}
+
+.event-item.default {
+  background-color: #f5f5f5;
+  color: #666;
+  border-left: 3px solid #999;
+}
+
+.event-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.event-type {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.event-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.event-actions {
+  display: flex;
+  gap: 2px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.event-item:hover .event-actions {
+  opacity: 1;
+}
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-delete:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .event-item {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  .event-name {
+    display: none;
+  }
+
+  .event-actions {
+    opacity: 1;
+  }
+}
