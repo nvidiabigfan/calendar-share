@@ -2,6 +2,12 @@ import React from 'react';
 import '../styles/EventItem.css';
 
 function EventItem({ event, onEdit, onDelete, showActions = false }) {
+  // 기존 형식(type, name, startDate, endDate) 자동 삭제
+  if (!event.selectedPeople && event.type && event.startDate) {
+    setTimeout(() => onDelete(), 0);
+    return null;
+  }
+
   return (
     <div className="event-item off">
       <div className="event-content">
