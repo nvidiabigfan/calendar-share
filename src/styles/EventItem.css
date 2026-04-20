@@ -61,6 +61,22 @@
   opacity: 0.8;
 }
 
+.people-list {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.person-tag {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
 .event-actions {
   display: flex;
   gap: 2px;

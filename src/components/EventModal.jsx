@@ -1,29 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/EventModal.css';
 
+const PEOPLE = ['천배', '형렬', '민수', '병진', '승민'];
+
 function EventModal({ date, event, onSave, onClose }) {
-  const [type, setType] = useState(event?.type || '근무');
-  const [name, setName] = useState(event?.name || '');
-  const [startDate, setStartDate] = useState(event?.startDate || date);
-  const [endDate, setEndDate] = useState(event?.endDate || date);
+  const [selectedPeople, setSelectedPeople] = useState(event?.selectedPeople || []);
+  const [eventDate, setEventDate] = useState(event?.date || date);
 
   useEffect(() => {
     if (event) {
-      setType(event.type);
-      setName(event.name);
-      setStartDate(event.startDate);
-      setEndDate(event.endDate);
+      setSelectedPeople(event.selectedPeople || []);
+      setEventDate(event.date);
     }
   }, [event]);
 
+  const handlePeopleToggle = (person) => {
+    setSelectedPeople((prev) =>
+      prev.includes(person)
+        ? prev.filter((p) => p !== person)
+        : [...prev, person]
+    );
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (selectedPeople.length === 0) {
+      alert('최소 한 명은 선택해주세요');
+      return;
+    }
     onSave({
-      type,
-      name,
-      date: startDate,
-      startDate,
-      endDate,
+      type: '휴무',
+      selectedPeople,
+      date: eventDate,
+      startDate: eventDate,
+      endDate: eventDate,
     });
   };
 
@@ -34,42 +44,29 @@ function EventModal({ date, event, onSave, onClose }) {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Type *</label>
-            <select value={type} onChange={(e) => setType(e.target.value)}>
-              <option>근무</option>
-              <option>휴무</option>
-              <option>휴가</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., 병원 휴가"
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Start Date *</label>
+            <label>Date *</label>
             <input
               type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
               required
             />
           </div>
 
           <div className="form-group">
-            <label>End Date *</label>
-            <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-              required
-            />
+            <label>누가 쉬나요? *</label>
+            <div className="people-selector">
+              {PEOPLE.map((person) => (
+                <button
+                  key={person}
+                  type="button"
+                  className={`people-btn ${selectedPeople.includes(person) ? 'selected' : ''}`}
+                  onClick={() => handlePeopleToggle(person)}
+                >
+                  {person}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="modal-buttons">
