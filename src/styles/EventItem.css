@@ -23,9 +23,9 @@
 }
 
 .event-item.off {
-  background-color: #f3e5f5;
-  color: #7b1fa2;
-  border-left: 3px solid #7b1fa2;
+  background-color: #e8e8e8;
+  color: #1a1a1a;
+  border-left: 3px solid #1a1a1a;
 }
 
 .event-item.vacation {

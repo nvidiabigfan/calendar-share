@@ -60,8 +60,7 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <h1>📅 Shared Calendar</h1>
-        <p className="calendar-id">Calendar ID: <code>{currentCalendarId}</code></p>
+        <h1>휴무일정 공유달력</h1>
       </header>
 
       <main>
