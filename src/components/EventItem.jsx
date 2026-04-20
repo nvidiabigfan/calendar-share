@@ -9,7 +9,7 @@ function EventItem({ event, onEdit, onDelete, showActions = false }) {
   }
 
   return (
-    <div className={`event-item off`} onClick={() => onEdit && onEdit()}>
+    <div className={`event-item off`} onClick={(e) => { e.stopPropagation(); onEdit && onEdit(); }}>
       <div className="event-content">
         {event.selectedPeople && event.selectedPeople.length > 0 ? (
           <div className="people-list">
