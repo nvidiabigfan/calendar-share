@@ -3,7 +3,7 @@ import '../styles/EventModal.css';
 
 const PEOPLE = ['천배', '형렬', '민수', '병진', '승민'];
 
-function EventModal({ date, event, onSave, onClose }) {
+function EventModal({ date, event, onSave, onClose, onDelete }) {
   const [selectedPeople, setSelectedPeople] = useState(event?.selectedPeople || []);
   const [eventDate, setEventDate] = useState(event?.date || date);
 
@@ -29,16 +29,20 @@ function EventModal({ date, event, onSave, onClose }) {
       return;
     }
 
-    // 각 사람마다 별도의 이벤트로 저장
-    selectedPeople.forEach((person) => {
-      onSave({
-        type: '휴무',
-        person,
-        date: eventDate,
-        startDate: eventDate,
-        endDate: eventDate,
-      });
+    onSave({
+      type: '휴무',
+      selectedPeople,
+      date: eventDate,
+      startDate: eventDate,
+      endDate: eventDate,
     });
+  };
+
+  const handleDelete = () => {
+    if (window.confirm('이 일정을 삭제하시겠습니까?')) {
+      onDelete();
+      onClose();
+    }
   };
 
   return (
@@ -75,6 +79,9 @@ function EventModal({ date, event, onSave, onClose }) {
 
           <div className="modal-buttons">
             <button type="submit" className="btn-save">Save</button>
+            {event && (
+              <button type="button" className="btn-delete" onClick={handleDelete}>Delete</button>
+            )}
             <button type="button" className="btn-cancel" onClick={onClose}>Cancel</button>
           </div>
         </form>

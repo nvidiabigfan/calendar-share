@@ -112,6 +112,17 @@ form {
   box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
+.btn-delete {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #ee5a52;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
 .btn-cancel {
   background-color: #f0f0f0;
   color: #333;

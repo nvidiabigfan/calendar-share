@@ -78,6 +78,7 @@ function App() {
             event={editingEvent}
             onSave={handleSaveEvent}
             onClose={() => setShowModal(false)}
+            onDelete={() => editingEvent && handleDeleteEvent(editingEvent.id)}
           />
         )}
       </main>
