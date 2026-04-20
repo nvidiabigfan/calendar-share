@@ -2,13 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  gap: 4px;
+  gap: 2px;
+  line-height: 1.2;
 }
 
 .event-item:hover {
@@ -63,18 +64,23 @@
 
 .people-list {
   display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
+  gap: 2px;
+  flex-wrap: nowrap;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .person-tag {
   display: inline-block;
-  padding: 2px 6px;
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.4);
-  font-size: 0.7rem;
+  padding: 1px 3px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
   font-weight: 600;
+  min-width: 14px;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .event-actions {

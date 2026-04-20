@@ -12,9 +12,9 @@ function EventItem({ event, onEdit, onDelete, showActions = false }) {
     const shortMap = {
       '천배': '천',
       '형렬': '형',
-      '민수': '민',
+      '민수': '수',
       '병진': '진',
-      '승민': '민',
+      '승민': '승',
     };
     return shortMap[name] || name.charAt(0);
   };

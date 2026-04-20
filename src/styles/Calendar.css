@@ -90,8 +90,8 @@
 .events-list {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin-top: 4px;
+  gap: 1px;
+  margin-top: 2px;
 }
 
 @media (max-width: 768px) {
