@@ -36,11 +36,21 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
   const days = [];
-  for (let i = 0; i < firstDay; i++) {
+  // 월요일부터 시작 (일요일=0, 월요일=1, ..., 토요일=6)
+  const adjustedFirstDay = firstDay === 0 ? 6 : firstDay - 1;
+
+  // 첫 주의 월요일 이전 빈 셀
+  for (let i = 0; i < adjustedFirstDay; i++) {
     days.push(null);
   }
+
+  // 각 날짜 추가 (토/일 제외)
   for (let i = 1; i <= daysInMonth; i++) {
-    days.push(i);
+    const dayOfWeek = (adjustedFirstDay + i - 1) % 7;
+    // 토요일(5) 또는 일요일(6, 조정됨)이 아닌 경우만 추가
+    if (dayOfWeek < 5) {
+      days.push(i);
+    }
   }
 
   return (
@@ -52,7 +62,7 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
       </div>
 
       <div className="weekdays">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day) => (
           <div key={day} className="weekday">
             {day}
           </div>

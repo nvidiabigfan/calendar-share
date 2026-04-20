@@ -8,13 +8,24 @@ function EventItem({ event, onEdit, onDelete, showActions = false }) {
     return null;
   }
 
+  const getShortName = (name) => {
+    const shortMap = {
+      '천배': '천',
+      '형렬': '형',
+      '민수': '민',
+      '병진': '진',
+      '승민': '민',
+    };
+    return shortMap[name] || name.charAt(0);
+  };
+
   return (
     <div className={`event-item off`} onClick={(e) => { e.stopPropagation(); onEdit && onEdit(); }}>
       <div className="event-content">
         {event.selectedPeople && event.selectedPeople.length > 0 ? (
           <div className="people-list">
             {event.selectedPeople.map((person) => (
-              <span key={person} className="person-tag">{person}</span>
+              <span key={person} className="person-tag">{getShortName(person)}</span>
             ))}
           </div>
         ) : (
