@@ -28,12 +28,16 @@ function EventModal({ date, event, onSave, onClose }) {
       alert('최소 한 명은 선택해주세요');
       return;
     }
-    onSave({
-      type: '휴무',
-      selectedPeople,
-      date: eventDate,
-      startDate: eventDate,
-      endDate: eventDate,
+
+    // 각 사람마다 별도의 이벤트로 저장
+    selectedPeople.forEach((person) => {
+      onSave({
+        type: '휴무',
+        person,
+        date: eventDate,
+        startDate: eventDate,
+        endDate: eventDate,
+      });
     });
   };
 

@@ -46,6 +46,7 @@
   gap: 4px;
   flex: 1;
   min-width: 0;
+  cursor: pointer;
 }
 
 .event-type {
@@ -103,8 +104,14 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.btn-delete {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
 .btn-delete:hover {
-  background-color: rgba(255, 0, 0, 0.1);
+  opacity: 1;
+  background-color: rgba(255, 0, 0, 0.15);
 }
 
 @media (max-width: 480px) {
