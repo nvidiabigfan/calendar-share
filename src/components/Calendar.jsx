@@ -1,28 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import KoreanHolidays from 'korean-holidays';
 import EventItem from './EventItem';
 import '../styles/Calendar.css';
 
-const HOLIDAYS = {
-  '2026-01-01': '새해',
-  '2026-02-12': '설',
-  '2026-02-13': '설',
-  '2026-02-14': '설',
-  '2026-03-01': '삼일절',
-  '2026-04-15': '총선',
-  '2026-05-05': '어린이날',
-  '2026-05-15': '부처님오신날',
-  '2026-06-06': '현충일',
-  '2026-08-15': '광복절',
-  '2026-09-24': '추석',
-  '2026-09-25': '추석',
-  '2026-09-26': '추석',
-  '2026-10-03': '개천절',
-  '2026-10-09': '한글날',
-  '2026-12-25': '크리스마스',
-};
-
 function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  const holidayMap = useMemo(() => {
+    const map = {};
+    const holidays = KoreanHolidays.getHolidays(currentDate.getFullYear());
+    holidays.forEach(holiday => {
+      const dateStr = holiday.date.toISOString().split('T')[0];
+      map[dateStr] = holiday.nameKo;
+    });
+    return map;
+  }, [currentDate.getFullYear()]);
 
   const getDaysInMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -33,7 +25,7 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   };
 
   const isHoliday = (dateStr) => {
-    return HOLIDAYS[dateStr] !== undefined;
+    return holidayMap[dateStr] !== undefined;
   };
 
   const prevMonth = () => {
