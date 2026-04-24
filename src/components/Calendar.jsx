@@ -5,16 +5,17 @@ import '../styles/Calendar.css';
 
 function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const year = currentDate.getFullYear();
 
   const holidayMap = useMemo(() => {
     const map = {};
-    const holidays = KoreanHolidays.getHolidays(currentDate.getFullYear());
+    const holidays = KoreanHolidays.getHolidays(year);
     holidays.forEach(holiday => {
       const dateStr = holiday.date.toISOString().split('T')[0];
       map[dateStr] = holiday.nameKo;
     });
     return map;
-  }, [currentDate.getFullYear()]);
+  }, [year]);
 
   const getDaysInMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -46,7 +47,6 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
 
   const daysInMonth = getDaysInMonth(currentDate);
   const firstDay = getFirstDayOfMonth(currentDate);
-  const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
