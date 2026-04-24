@@ -12,7 +12,7 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
     const holidays = KoreanHolidays.getHolidays(year);
     holidays.forEach(holiday => {
       const date = new Date(holiday.date);
-      const offset = date.getTimezoneOffset() * 60000;
+      const offset = -date.getTimezoneOffset() * 60000;
       const localDate = new Date(date.getTime() + offset);
       const dateStr = localDate.toISOString().split('T')[0];
       map[dateStr] = holiday.nameKo;
