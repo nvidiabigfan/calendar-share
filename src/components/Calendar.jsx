@@ -3,6 +3,12 @@ import KoreanHolidays from 'korean-holidays';
 import EventItem from './EventItem';
 import '../styles/Calendar.css';
 
+// 선거일 (공휴일 아님, 휴무)
+const ELECTION_DAYS = {
+  '2026-04-15': '총선',
+  '2026-06-03': '지방선거',
+};
+
 function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const year = currentDate.getFullYear();
@@ -16,6 +22,10 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
       const localDate = new Date(date.getTime() + offset);
       const dateStr = localDate.toISOString().split('T')[0];
       map[dateStr] = holiday.nameKo;
+    });
+    // 선거일 추가
+    Object.entries(ELECTION_DAYS).forEach(([dateStr, name]) => {
+      map[dateStr] = name;
     });
     return map;
   }, [year]);
