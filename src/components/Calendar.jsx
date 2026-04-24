@@ -2,6 +2,25 @@ import React, { useState } from 'react';
 import EventItem from './EventItem';
 import '../styles/Calendar.css';
 
+const HOLIDAYS = {
+  '2026-01-01': '새해',
+  '2026-02-12': '설',
+  '2026-02-13': '설',
+  '2026-02-14': '설',
+  '2026-03-01': '삼일절',
+  '2026-04-15': '총선',
+  '2026-05-05': '어린이날',
+  '2026-05-15': '부처님오신날',
+  '2026-06-06': '현충일',
+  '2026-08-15': '광복절',
+  '2026-09-24': '추석',
+  '2026-09-25': '추석',
+  '2026-09-26': '추석',
+  '2026-10-03': '개천절',
+  '2026-10-09': '한글날',
+  '2026-12-25': '크리스마스',
+};
+
 function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -11,6 +30,10 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
 
   const getFirstDayOfMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  };
+
+  const isHoliday = (dateStr) => {
+    return HOLIDAYS[dateStr] !== undefined;
   };
 
   const prevMonth = () => {
@@ -81,7 +104,7 @@ function Calendar({ events, onDateClick, onEditEvent, onDeleteEvent }) {
           return (
             <div
               key={day}
-              className="day-cell"
+              className={`day-cell ${isHoliday(dateStr) ? 'holiday' : ''}`}
               onClick={() => onDateClick(dateStr)}
             >
               <div className="day-number">{day}</div>
